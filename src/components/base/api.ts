@@ -14,12 +14,12 @@ export class Api {
         this.options = {
             headers: {
                 'Content-Type': 'application/json',
-                ...(options.headers as object ?? {})
+                ...((options.headers as object) ?? {})
             }
         };
     }
 
-    protected handleResponse(response: Response): Promise<object> {
+    protected handleResponse(response: Response): Promise<object> { 
         if (response.ok) return response.json();
         else return response.json()
             .then(data => Promise.reject(data.error ?? response.statusText));
