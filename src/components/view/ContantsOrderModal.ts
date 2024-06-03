@@ -3,7 +3,6 @@ import { settings } from '../../utils/constants';
 import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/events";
 import { OrderModal } from "./orderModal";
-
 export class ContantsOrderModal extends OrderModal implements IContantsOrderModal {
     protected _emailInput: HTMLInputElement;
     protected _phoneNumberInput: HTMLInputElement;
@@ -35,25 +34,13 @@ export class ContantsOrderModal extends OrderModal implements IContantsOrderModa
         this._events.on(settings.event.modal.opened, this.setValidity.bind(this));
     }
     resetAll(): void {
-        // this._emailInput.value = '';
-        // this._phoneNumberInput.value = '';
         this.setInputValue(this._emailInput, '');
         this.setInputValue(this._phoneNumberInput, '');
     }
-    // setValidity(): void {
-    //     this.isValid()
-    //         ? this._submitButton.removeAttribute('disabled')
-    //         : this._submitButton.setAttribute('disabled', 'true');
-    // }
     isValid(): boolean {
         return ((this._emailInput.value.length !== 0) &&
         (this._phoneNumberInput.value.length !== 0))
     }
-    // setError(): void {
-    //     this.isValid()
-    //         ? this._errorMessage.textContent = ''
-    //         : this._errorMessage.textContent = 'Заполните все поля';
-    // }
     set emailInput(emailInput: HTMLInputElement) {
         this._emailInput = emailInput;
     }

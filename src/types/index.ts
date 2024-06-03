@@ -45,15 +45,12 @@ export type TSuccessOrderModal = {
 }
 
 /////////////////////////// MODEL ///////////////////////////
-
 export interface IModel {
     events: IEvents;
 }
-
 export interface IProductsData {
     products: IProduct[];
 }
-
 export interface IProduct {
     id: string;
     description: string;
@@ -62,7 +59,6 @@ export interface IProduct {
     category: string;
     price: number;
 }
-
 export interface IBasket {
     products: IProduct[];
     addProduct(product: IProduct): void;
@@ -77,7 +73,6 @@ export interface IBasket {
     getAllIDs(): string[];
     isEmpty(): boolean;
 }
-
 export interface IOrder {
     payment: string;
     email: string;
@@ -88,42 +83,9 @@ export interface IOrder {
     getValues(): TOrder;
     removeAll(): void;
 }
-
-// export interface IUser {
-//     address: string;
-//     email: string;
-//     phoneNumber: string;
-//     paymentMethod: TPaymentMethod;
-//     basket: IBasket;
-//     setAddress(address: string): void;
-//     setEmail(email: string): void;
-//     setPhoneNumber(phoneNumber: string): void;
-//     setPaymentMethod(paymentMethod: TPaymentMethod): void;
-//     addProductToBasket(product: IProduct): void;
-//     removeProductFromBasket(product: IProduct): void;
-//     getProductsFromBasket(): IProduct[];
-//     clearBasket(): void;
-// }
-
-// export interface IForm {
-//     address: string;
-//     email: string;
-//     phoneNumber: string;
-//     paymentMethod: string;
-// }
-
 export interface IAPI {
     readonly cdn: string;
 }
-
-export interface IProductAPI extends IAPI {
-    getProducts(): Promise<IProduct[]>;
-}
-
-export interface IOrderAPI extends IAPI {
-    postOrder(order: TOrder): Promise<TOrderResponse>;
-}
-
 export interface IAppAPI {
     readonly cdn: string;
     getProducts(): Promise<IProduct[]>;
@@ -131,7 +93,6 @@ export interface IAppAPI {
 }
 
 /////////////////////////// VIEW ///////////////////////////
-
 export interface IView<T> {
     element: HTMLElement;
     events: IEvents;
@@ -145,7 +106,6 @@ export interface IView<T> {
     isContainsClass(element: HTMLElement, value: string): boolean;
     setImage(image: HTMLImageElement, link: string): void;
 }
-
 export interface IOrderModal {
     element: HTMLElement;
     events: IEvents;
@@ -156,7 +116,6 @@ export interface IOrderModal {
     setError(): void;
     resetAll(): void;
 }
-
 export interface IAddressOrderModal {
     cardMethodButton: HTMLButtonElement;
     cashMethodButton: HTMLButtonElement;
@@ -170,7 +129,6 @@ export interface IAddressOrderModal {
     isValid(): boolean;
     setError(): void
 }
-
 export interface IContantsOrderModal {
     emailInput: HTMLInputElement;
     phoneNumberInput: HTMLInputElement;
@@ -181,23 +139,12 @@ export interface IContantsOrderModal {
     isValid(): boolean;
     setError(): void
 }
-
 export interface IPage {
     cardList: HTMLElement[];
     basketCounter: number;
     lockScreen(): void;
     unlockScreen(): void;
 }
-
-// export interface ICard {
-//     id: string;
-//     description: HTMLParagraphElement;
-//     image: HTMLImageElement;
-//     title: HTMLHeadElement;
-//     category: HTMLSpanElement;
-//     price: HTMLSpanElement;
-// }
-
 export interface ICatalogCard {
     id: string;
     image: string;
@@ -205,7 +152,6 @@ export interface ICatalogCard {
     category: string;
     price: number;
 }
-
 export interface IModal {
     content: HTMLElement;
     setModalListeners(): void;
@@ -213,22 +159,18 @@ export interface IModal {
     open(): void;
     close(): void;
 }
-
 export interface ICardModal extends ICatalogCard {
     isInBasket: boolean;
     description: string;
 }
-
 export interface IBasketModal {
     cardList: HTMLElement[];
     orderButton: HTMLButtonElement;
 }
-
 export interface ISuccessOrderModal {
     total: number;
     successButton: HTMLButtonElement;
 }
-
 export interface IBasketCard extends Pick<ICatalogCard, 'id' | 'title' | 'price'> {
     index: number;
 }

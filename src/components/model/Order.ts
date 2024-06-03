@@ -2,7 +2,6 @@ import { IOrder, TOrder } from "../../types";
 import { settings } from "../../utils/constants";
 import { IEvents } from "../base/events";
 import { Model } from "./Model";
-
 export class Order extends Model implements IOrder {
     protected _payment: string;
     protected _email: string;
@@ -15,24 +14,6 @@ export class Order extends Model implements IOrder {
         this._items = [];
         this.events.on(settings.event.modal.closed, this.removeAll.bind(this));
     }
-    set payment(payment: string){
-        this._payment = payment;
-    };
-    set email(email: string){
-        this._email = email;
-    };
-    set phone(phone: string){
-        this._phone = phone;
-    };
-    set address(address: string){
-        this._address = address;
-    };
-    set total(total: number){
-        this._total = total;
-    };
-    set items(items: string[]){
-        this._items = items.slice();
-    };
     getValues(): TOrder {
         return {
             payment: this._payment,
@@ -50,5 +31,23 @@ export class Order extends Model implements IOrder {
         this._phone = undefined;
         this._total = undefined;
         this._items = undefined;
+    }
+    set payment(payment: string) {
+        this._payment = payment;
+    }
+    set email(email: string) {
+        this._email = email;
+    }
+    set phone(phone: string) {
+        this._phone = phone;
+    }
+    set address(address: string) {
+        this._address = address;
+    }
+    set total(total: number) {
+        this._total = total;
+    }
+    set items(items: string[]){
+        this._items = items.slice();
     }
 }

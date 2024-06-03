@@ -1,9 +1,8 @@
 import { ISuccessOrderModal, TSuccessOrderModal } from "../../types";
-import {View} from './View';
+import { View } from './View';
 import { settings } from '../../utils/constants';
 import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/events";
-
 export class SuccessOrderModal extends View<TSuccessOrderModal> implements ISuccessOrderModal {
     protected _description: HTMLParagraphElement;
     protected _successButton: HTMLButtonElement;
@@ -16,7 +15,6 @@ export class SuccessOrderModal extends View<TSuccessOrderModal> implements ISucc
         })
     }
     set total(total: number) {
-        // this._description.textContent = `Списано ${total} синапсов`;
         this.setTextContent(this._description, `Списано ${total} синапсов`);
     }
     set successButton(successButton: HTMLButtonElement) {

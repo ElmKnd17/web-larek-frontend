@@ -2,7 +2,6 @@ import { IProductsData, IProduct } from "../../types";
 import { settings } from "../../utils/constants";
 import { IEvents } from "../base/events";
 import { Model } from "./Model";
-
 export class Products extends Model implements IProductsData {
     products: IProduct[];
     constructor(events: IEvents) {

@@ -1,9 +1,8 @@
 import { ICatalogCard, TCatalogCard } from "../../types";
-import {View} from './View';
+import { View } from './View';
 import { settings } from '../../utils/constants';
 import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/events";
-
 export class CatalogCard extends View<TCatalogCard> implements ICatalogCard {
     protected _id: string;
     protected _image: HTMLImageElement;
@@ -24,20 +23,14 @@ export class CatalogCard extends View<TCatalogCard> implements ICatalogCard {
         this._id = id;
     }
     set image(link: string) {
-        // this._image.src = link;
         this.setImage(this._image, link);
     }
     set title(title: string) {
-        // this._title.textContent = title;
         this.setTextContent(this._title, title);
     }
     set category(category: string) {
-        // this._category.textContent = category;
         this.setTextContent(this._category, category);
         if (category in settings.card.categoryClasses) {
-            // this._category.classList.add(
-            //     settings.card.categoryClasses[category as keyof typeof settings.card.categoryClasses]
-            // );
             this.addClass(
                 this._category,
                 settings.card.categoryClasses[category as keyof typeof settings.card.categoryClasses]
@@ -45,8 +38,6 @@ export class CatalogCard extends View<TCatalogCard> implements ICatalogCard {
         }
     }
     set price(price: number) {
-        // this._price.textContent = price ? `${price} синапсов` : 'Бесценно'
         this.setTextContent(this._price, price ? `${price} синапсов` : 'Бесценно');
     }
-
 }

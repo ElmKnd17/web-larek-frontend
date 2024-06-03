@@ -30,10 +30,6 @@ export class Api {
       }
 
     get(uri: string) {
-        // return fetch(this.baseUrl + uri, {
-        //     ...this.options,
-        //     method: 'GET'
-        // }).then(this._handleResponse<T>);
         return this._request(this.baseUrl + uri, {
             ...this.options,
             method: 'GET'
@@ -41,11 +37,6 @@ export class Api {
     }
 
     post(uri: string, data: object, method: ApiPostMethods = 'POST') {
-        // return fetch(this.baseUrl + uri, {
-        //     ...this.options,
-        //     method,
-        //     body: JSON.stringify(data)
-        // }).then(this._handleResponse);
         return this._request(this.baseUrl + uri, {
             ...this.options,
             method,

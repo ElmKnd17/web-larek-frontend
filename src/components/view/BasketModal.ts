@@ -3,7 +3,6 @@ import { View } from './View';
 import { settings } from '../../utils/constants';
 import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/events";
-
 export class BasketModal extends View<TBasketModal> implements TBasketModal {
     protected _basketList: HTMLDivElement;
     protected _total: HTMLSpanElement;
@@ -17,28 +16,20 @@ export class BasketModal extends View<TBasketModal> implements TBasketModal {
             this._events.emit(settings.event.basket.submitButtonClicked);
         })
     }
-
     set isEmpty(isEmpty: boolean) {
         if(isEmpty) {
-            // this._button.setAttribute('disabled', 'true');
             this.setDisabled(this._button);
         } else {
-            // this._button.removeAttribute('disabled');
             this.removeDisabled(this._button);
         }
     }
-
     set basketList(basketList: HTMLElement[]) {
         this._basketList.replaceChildren(...basketList);
     }
-
     set total(total: number) {
-        // this._total.textContent = total.toString() + ' синапсов';
         this.setTextContent(this._total, total.toString() + ' синапсов');
     }
-
     set button(button: HTMLButtonElement) {
         this._button = button;
     }
-
 }
