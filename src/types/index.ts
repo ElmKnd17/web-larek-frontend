@@ -124,12 +124,26 @@ export interface IOrderAPI extends IAPI {
     postOrder(order: TOrder): Promise<TOrderResponse>;
 }
 
+export interface IAppAPI {
+    readonly cdn: string;
+    getProducts(): Promise<IProduct[]>;
+    postOrder(order: TOrder): Promise<TOrderResponse>;
+}
+
 /////////////////////////// VIEW ///////////////////////////
 
 export interface IView<T> {
     element: HTMLElement;
     events: IEvents;
     render(data?: T): HTMLElement;
+    setDisabled(button: HTMLButtonElement): void;
+    removeDisabled(button: HTMLButtonElement): void;
+    setTextContent(element: HTMLElement, textContent: string): void;
+    setInputValue(input: HTMLInputElement, value: string): void;
+    addClass(element: HTMLElement, value: string): void;
+    removeClass(element: HTMLElement, value: string): void;
+    isContainsClass(element: HTMLElement, value: string): boolean;
+    setImage(image: HTMLImageElement, link: string): void;
 }
 
 export interface IOrderModal {
@@ -137,7 +151,10 @@ export interface IOrderModal {
     events: IEvents;
     submitButton: HTMLButtonElement;
     errorMessage: HTMLSpanElement;
-    render(): HTMLElement
+    isValid(): boolean;
+    setValidity(): void;
+    setError(): void;
+    resetAll(): void;
 }
 
 export interface IAddressOrderModal {
@@ -170,7 +187,6 @@ export interface IPage {
     basketCounter: number;
     lockScreen(): void;
     unlockScreen(): void;
-    setBasketCounter(value: string): void;
 }
 
 // export interface ICard {
@@ -192,6 +208,8 @@ export interface ICatalogCard {
 
 export interface IModal {
     content: HTMLElement;
+    setModalListeners(): void;
+    removeModalListeners(): void;
     open(): void;
     close(): void;
 }

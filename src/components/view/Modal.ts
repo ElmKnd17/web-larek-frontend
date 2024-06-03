@@ -32,18 +32,32 @@ export class Modal extends View<TModal> implements IModal {
         this.close();
     }
     open(): void {
-        this._element.classList.add(settings.modal.active);
-        document.addEventListener('keydown', this._boundCloseByEscapeHandler);
-        this._element.addEventListener('click', this._boundCloseByOverlayHandler);
-        this._closeButton.addEventListener('click', this._boundCloseByButtonHandler);
+        // this._element.classList.add(settings.modal.active);
+        this.addClass(this._element, settings.modal.active);
+        // document.addEventListener('keydown', this._boundCloseByEscapeHandler);
+        // this._element.addEventListener('click', this._boundCloseByOverlayHandler);
+        // this._closeButton.addEventListener('click', this._boundCloseByButtonHandler);
+        this.setModalListeners();
         this._events.emit(settings.event.modal.opened)
     }
     close(): void {
-        this._element.classList.remove(settings.modal.active);
+        // this._element.classList.remove(settings.modal.active);
+        this.removeClass(this._element, settings.modal.active);
+        // document.removeEventListener('keydown', this._boundCloseByEscapeHandler);
+        // this._element.removeEventListener('click', this._boundCloseByOverlayHandler);
+        // this._closeButton.removeEventListener('click', this._boundCloseByButtonHandler);
+        this.removeModalListeners();
+        this._events.emit(settings.event.modal.closed)
+    }
+    setModalListeners(): void {
+        document.addEventListener('keydown', this._boundCloseByEscapeHandler);
+        this._element.addEventListener('click', this._boundCloseByOverlayHandler);
+        this._closeButton.addEventListener('click', this._boundCloseByButtonHandler);
+    }
+    removeModalListeners(): void {
         document.removeEventListener('keydown', this._boundCloseByEscapeHandler);
         this._element.removeEventListener('click', this._boundCloseByOverlayHandler);
         this._closeButton.removeEventListener('click', this._boundCloseByButtonHandler);
-        this._events.emit(settings.event.modal.closed)
     }
     set content(content: HTMLElement) {
         this._content.replaceChildren(content);

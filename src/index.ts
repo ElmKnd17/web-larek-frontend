@@ -7,8 +7,9 @@ import { ensureElement, cloneTemplate } from './utils/utils';
 import { Products } from './components/model/Products';
 import { Order } from './components/model/Order';
 import { Basket } from './components/model/Basket';
-import { ProductAPI } from './components/model/productAPI';
-import { OrderAPI } from './components/model/OrderAPI';
+// import { ProductAPI } from './components/model/productAPI';
+// import { OrderAPI } from './components/model/OrderAPI';
+import { AppAPI } from './components/model/AppAPI'
 import { Modal } from './components/view/Modal';
 import { CardModal } from './components/view/CardModal';
 import { AddressOrderModal } from './components/view/AddressOrderModal';
@@ -35,8 +36,9 @@ const successOrderModalTemplate = ensureElement<HTMLTemplateElement>(settings.or
 const products = new Products(events);
 const basket = new Basket(events);
 const order = new Order(events);
-const productsApi = new ProductAPI(CDN_URL, API_URL);
-const orderAPI = new OrderAPI(CDN_URL, API_URL);
+// const productsAPI = new ProductAPI(CDN_URL, API_URL);
+// const orderAPI = new OrderAPI(CDN_URL, API_URL);
+const appAPI = new AppAPI(CDN_URL, API_URL);
 const page = new Page(pageContainer, events);
 const modal = new Modal(modalContainer, events);
 const cardModal = new CardModal(cloneTemplate(cardModalTemplate), events);
@@ -47,9 +49,9 @@ const successOrderModal = new SuccessOrderModal(cloneTemplate(successOrderModalT
 
 /////////////////////////////// Получение продуктов с сервера ///////////////////////////////
 
-productsApi.getProducts().then(productsData => {
+appAPI.getProducts().then(productsData => {
     products.setProducts(productsData);
-}).catch(error => console.error(error));
+}).catch(console.error);
 
 /////////////////////////////// Реакция на получение продукта с сервера ///////////////////////////////
 
@@ -158,7 +160,7 @@ events.on(settings.event.order.contacts.button.clicked, (data: TContactsOrderMod
     order.phone = data.phone;
     console.log(`На сервер отправлено:`);
     console.log(order.getValues());
-    orderAPI.postOrder(order.getValues()).then((data: TOrderResponse) => {
+    appAPI.postOrder(order.getValues()).then((data: TOrderResponse) => {
         modal.render({
             content: successOrderModal.render({
                 total: data.total
@@ -166,12 +168,12 @@ events.on(settings.event.order.contacts.button.clicked, (data: TContactsOrderMod
         })
         console.log(`В ответ получено:`);
         console.log(data);
-    }).catch(error => console.log(error));
+    }).catch(console.error);
+    basket.removeAll();
 })
 
 /////////////////////////////// Реакция на нажатие кнопки 'За новыми покупками' в модальном окне успешного заказа ///////////////////////////////
 
 events.on(settings.event.order.success.button.clicked, () => {
     modal.close();
-    basket.removeAll();
 })

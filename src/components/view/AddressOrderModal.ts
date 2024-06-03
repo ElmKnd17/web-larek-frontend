@@ -48,34 +48,49 @@ export class AddressOrderModal extends OrderModal implements IAddressOrderModal 
         this._addres = address;
     }
     setSelection(evt: MouseEvent): void {
-        this.resetSelection();
-        (evt.target as HTMLButtonElement).classList.add(settings.order.activeButton);
         this._payment = (evt.target as HTMLButtonElement).name;
+        this.resetSelection();
+        // (evt.target as HTMLButtonElement).classList.add(settings.order.activeButton);
+        this.addClass(evt.target as HTMLButtonElement, settings.order.activeButton);
         this.setError();
         this.setValidity();
     }
     resetSelection(): void {
-        this._cardMethodButton.classList.remove(settings.order.activeButton);
-        this._cashMethodButton.classList.remove(settings.order.activeButton);
+        // this._cardMethodButton.classList.remove(settings.order.activeButton);
+        // this._cashMethodButton.classList.remove(settings.order.activeButton);
+        this.removeClass(this._cardMethodButton, settings.order.activeButton);
+        this.removeClass(this._cashMethodButton, settings.order.activeButton);
     }
     resetAll(): void {
-        this._addresInput.value = '';
-        this._errorMessage.textContent = '';
+        // this._addresInput.value = '';
+        // this._errorMessage.textContent = '';
+        this.setInputValue(this._addresInput, '');
+        this.setTextContent(this._errorMessage, '');
         this.resetSelection();
     }
     isValid(): boolean {
-        return (this._cardMethodButton.classList.contains(settings.order.activeButton) ||
-        this._cashMethodButton.classList.contains(settings.order.activeButton)) &&
-        (this._addresInput.value.length !== 0)
+        // return (
+        //     this._cardMethodButton.classList.contains(settings.order.activeButton) ||
+        //     this._cashMethodButton.classList.contains(settings.order.activeButton)) &&
+        //     (this._addresInput.value.length !== 0);
+        return (
+            (this.isContainsClass(this._cardMethodButton, settings.order.activeButton) ||
+            this.isContainsClass(this._cashMethodButton, settings.order.activeButton)) &&
+            (this._addresInput.value.length !== 0)
+        );
     }
-    setValidity(): void {
-        this.isValid()
-            ? this._submitButton.removeAttribute('disabled')
-            : this._submitButton.setAttribute('disabled', 'true');
-    }
-    setError(): void {
-        this.isValid()
-            ? this._errorMessage.textContent = ''
-            : this._errorMessage.textContent = 'Заполните все поля';
-    }
+    // setValidity(): void {
+    //     // this.isValid()
+    //     //     ? this._submitButton.removeAttribute('disabled')
+    //     //     : this._submitButton.setAttribute('disabled', 'true');
+    //     this.isValid()
+    //         ? this.removeDisabled(this._submitButton)
+    //         : this.setDisabled(this._submitButton);
+    // }
+    // setError(): void {
+    //     // this.isValid()
+    //     //     ? this._errorMessage.textContent = ''
+    //     //     : this._errorMessage.textContent = 'Заполните все поля';
+    //     this.setTextContent(this._errorMessage, this.isValid() ? '' : 'Заполните все поля');
+    // }
 }

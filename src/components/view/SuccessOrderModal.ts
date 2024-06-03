@@ -16,7 +16,8 @@ export class SuccessOrderModal extends View<TSuccessOrderModal> implements ISucc
         })
     }
     set total(total: number) {
-        this._description.textContent = `Списано ${total} синапсов`;
+        // this._description.textContent = `Списано ${total} синапсов`;
+        this.setTextContent(this._description, `Списано ${total} синапсов`);
     }
     set successButton(successButton: HTMLButtonElement) {
         this._successButton = successButton;

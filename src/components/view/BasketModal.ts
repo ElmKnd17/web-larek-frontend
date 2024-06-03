@@ -20,9 +20,11 @@ export class BasketModal extends View<TBasketModal> implements TBasketModal {
 
     set isEmpty(isEmpty: boolean) {
         if(isEmpty) {
-            this._button.setAttribute('disabled', 'true');
+            // this._button.setAttribute('disabled', 'true');
+            this.setDisabled(this._button);
         } else {
-            this._button.removeAttribute('disabled');
+            // this._button.removeAttribute('disabled');
+            this.removeDisabled(this._button);
         }
     }
 
@@ -31,7 +33,8 @@ export class BasketModal extends View<TBasketModal> implements TBasketModal {
     }
 
     set total(total: number) {
-        this._total.textContent = total.toString();
+        // this._total.textContent = total.toString() + ' синапсов';
+        this.setTextContent(this._total, total.toString() + ' синапсов');
     }
 
     set button(button: HTMLButtonElement) {

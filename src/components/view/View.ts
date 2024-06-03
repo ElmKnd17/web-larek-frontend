@@ -12,6 +12,30 @@ export abstract class View<T extends Object> implements IView<T> {
         Object.assign(this, data ? data : {});
         return this._element;
     }
+    setDisabled(button: HTMLButtonElement): void {
+        button.setAttribute('disabled', 'true');
+    }
+    removeDisabled(button: HTMLButtonElement): void {
+        button.removeAttribute('disabled');
+    }
+    setTextContent(element: HTMLElement, textContent: string): void {
+        element.textContent = textContent;
+    }
+    setInputValue(input: HTMLInputElement, value: string): void {
+        input.value = value;
+    }
+    addClass(element: HTMLElement, value: string): void {
+        element.classList.add(value);
+    }
+    removeClass(element: HTMLElement, value: string): void {
+        element.classList.remove(value);
+    }
+    isContainsClass(element: HTMLElement, value: string): boolean {
+        return element.classList.contains(value);
+    }
+    setImage(image: HTMLImageElement, link: string): void {
+        image.src = link;
+    }
     set element(element: HTMLElement) {
         this._element = element;
     }

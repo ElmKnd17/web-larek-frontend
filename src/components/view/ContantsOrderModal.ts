@@ -19,6 +19,7 @@ export class ContantsOrderModal extends OrderModal implements IContantsOrderModa
                 email: this._email,
                 phone: this._phoneNumber
             })
+            this.setDisabled(evt.target as HTMLButtonElement);
         });
         this._emailInput.addEventListener('input', (evt) => {
             this.setValidity();
@@ -34,23 +35,25 @@ export class ContantsOrderModal extends OrderModal implements IContantsOrderModa
         this._events.on(settings.event.modal.opened, this.setValidity.bind(this));
     }
     resetAll(): void {
-        this._emailInput.value = '';
-        this._phoneNumberInput.value = '';
+        // this._emailInput.value = '';
+        // this._phoneNumberInput.value = '';
+        this.setInputValue(this._emailInput, '');
+        this.setInputValue(this._phoneNumberInput, '');
     }
-    setValidity(): void {
-        this.isValid()
-            ? this._submitButton.removeAttribute('disabled')
-            : this._submitButton.setAttribute('disabled', 'true');
-    }
+    // setValidity(): void {
+    //     this.isValid()
+    //         ? this._submitButton.removeAttribute('disabled')
+    //         : this._submitButton.setAttribute('disabled', 'true');
+    // }
     isValid(): boolean {
         return ((this._emailInput.value.length !== 0) &&
         (this._phoneNumberInput.value.length !== 0))
     }
-    setError(): void {
-        this.isValid()
-            ? this._errorMessage.textContent = ''
-            : this._errorMessage.textContent = 'Заполните все поля';
-    }
+    // setError(): void {
+    //     this.isValid()
+    //         ? this._errorMessage.textContent = ''
+    //         : this._errorMessage.textContent = 'Заполните все поля';
+    // }
     set emailInput(emailInput: HTMLInputElement) {
         this._emailInput = emailInput;
     }

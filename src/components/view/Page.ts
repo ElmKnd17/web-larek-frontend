@@ -25,15 +25,19 @@ export class Page extends View<TPage> implements IPage {
         this._catalog.replaceChildren(...cardList);
     }
     set basketCounter(value: number) {
-        this._basketCounter.textContent = value.toString();
+        // this._basketCounter.textContent = value.toString();
+        this.setTextContent(this._basketCounter, value.toString());
     }
     lockScreen(): void {
-        this._screen.classList.add(settings.page.lockedWrapper);
+        // this._screen.classList.add(settings.page.lockedWrapper);
+        this.addClass(this._screen, settings.page.lockedWrapper);
     };
     unlockScreen(): void {
-        this._screen.classList.remove(settings.page.lockedWrapper);
+        // this._screen.classList.remove(settings.page.lockedWrapper);
+        this.removeClass(this._screen, settings.page.lockedWrapper);
     };
-    setBasketCounter(value: string): void {
-        this._basketCounter.textContent = value;
-    };
+    // setBasketCounter(value: string): void {
+    //     // this._basketCounter.textContent = value;
+    //     // this.setTextContent(this._basketCounter, value);
+    // };
 }

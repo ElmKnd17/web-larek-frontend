@@ -24,12 +24,15 @@ export class BasketCard extends View<TBasketCard> implements IBasketCard {
         this._id = id;
     }
     set title(title: string) {
-        this._title.textContent = title;
+        // this._title.textContent = title;
+        this.setTextContent(this._title, title);
     };
     set price(price: number) {
-        this._price.textContent = price.toString();
+        // this._price.textContent = price.toString();
+        this.setTextContent(this._price, price.toString());
     };
     set index(index: number) {
-        this._index.textContent = index.toString();
+        // this._index.textContent = index.toString();
+        this.setTextContent(this._index, index.toString());
     };
 }
